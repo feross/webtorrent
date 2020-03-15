@@ -77,6 +77,10 @@ class WebTorrent extends EventEmitter {
     this.maxConns = Number(opts.maxConns) || 55
     this.utp = WebTorrent.UTP_SUPPORT && opts.utp !== false
 
+    if (opts.secure === true) {
+      require('./lib/peer').enableSecure();
+    }
+
     this._debug(
       'new webtorrent (peerId %s, nodeId %s, port %s)',
       this.peerId, this.nodeId, this.torrentPort
